@@ -1,0 +1,17 @@
+*{
+	margin:0;
+	padding:0;
+}
+html{
+	font-size: 41.4px;
+}
+body{
+	font-size: 0.4rem;
+}
+ul,li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+	color:black;
+}
