@@ -1,13 +1,22 @@
 <template>
   <div class="homepage">
-    <ul id='nav'>
-        <li><a href="#/">首页</a></li>
+    <ul class='nav'>
+        <li><a href="#/" style='color:white;'>首页</a></li>
         <li><a href="#/play">娱乐</a></li>
         <li><a href="#/game">游戏</a></li>
         <li><a href="#/article">文章</a></li>
-        <li>...</li>
+        <li v-on:click='navShow()'>...</li>  
     </ul>
-    <!-- <div id='swiper'><img src="../assets/swiper.png"></div> -->
+    <!-- 点击....后出现的导航 -->
+    <ul class='nav'>
+        <li style='background:white;' v-show='navFlag'><a href="#/animate">动画</a></li>
+        <li v-show='navFlag'><a href="#/music">音乐</a></li>
+        <li v-show='navFlag'><a href="#/keji">科技</a></li>
+        <li v-show='navFlag'><a href="#/sport">体育</a></li>
+        <li v-show='navFlag'><a href="#/movie">影视</a></li>
+    </ul>
+    <!-- 点击后出现的额外ul -->
+    
     <div class="swiper-container">
       <div class="swiper-wrapper">
           <div class="swiper-slide" v-for='img in swiperData'>
@@ -30,9 +39,9 @@
         <!-- 文章内的细节 -->
         <div class='article_detail'>
           <dl>
-            <img src="http://cdn.aixifan.com/dotnet/20120923/style/image/cover-day.png">
-            <h4>退出！又一个国家玩不起航母了</h4>
-            <p v-for='obj in homepageData'>{{obj.title}}}<span>{{obj.visit.comments}}</span></p>
+            <img src="http://imgs.aixifan.com/content/2017_02_19/1487483291.jpg">
+            <h4>外国网民评论《三生三世十里桃花》零差评爆红国外</h4>
+            <p v-for='obj in homepageData'>{{obj.title}}<span>{{obj.visit.comments}}</span></p>
           </dl>
         </div>
       </div>
@@ -124,6 +133,7 @@ export default {
   name: 'homepage',
   data () {
     return {
+      navFlag: false,
       homepageData: {},
       animateData: {},
       musicData: {},
@@ -149,25 +159,30 @@ export default {
       if (response.errno === 0) {
         this.articleName = response.homeData[8].name
         this.animateName = response.homeData[6].name
-        this.musicName = response.homeData[10].name
+        this.musicName = response.homeData[11].name
         this.gameName = response.homeData[9].name
         this.playName = response.homeData[7].name
-        this.kejiName = response.homeData[14].name
-        this.sportName = response.homeData[15].name
-        this.movieName = response.homeData[11].name
+        this.kejiName = response.homeData[15].name
+        this.sportName = response.homeData[16].name
+        this.movieName = response.homeData[12].name
         this.homepageData = response.homeData[8].contents
         this.animateData = response.homeData[6].contents
-        this.musicData = response.homeData[10].contents
+        this.musicData = response.homeData[11].contents
         this.gameData = response.homeData[9].contents
         this.playData = response.homeData[7].contents
-        this.kejiData = response.homeData[14].contents
-        this.sportData = response.homeData[15].contents
-        this.movieData = response.homeData[11].contents
+        this.kejiData = response.homeData[15].contents
+        this.sportData = response.homeData[16].contents
+        this.movieData = response.homeData[12].contents
         this.swiperData = response.homeData[0].contents
       }
     })
   },
   components: {},
+  methods: {
+      navShow: function () {
+        this.navFlag = !this.navFlag
+      }
+  },
   mounted () {
     // console.log('挂载好了')
     var mySwiper = new Swiper('.swiper-container', {
@@ -186,23 +201,29 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang='scss'>
-#nav{
+.nav{
   width: 100%;
   display: flex;
   list-style: none;
 }
-#nav li{
+.nav li{
   flex: 1;
   text-align: center;
   padding: 0.1rem 0;
   font-size: 0.35rem;
+  padding:2% 0;
+  color:rgb(116,116,116);
+  cursor: pointer;
 }
-#nav li:nth-child(1){
+.nav li a{
+  color:rgb(116,116,116);
+}
+.nav li:nth-child(1){
   background:rgb(255,133,27);
 }
-#nav li:nth-child(1) a{
+/*.nav li:nth-child(1) a{
   color: white;
-}
+}*/
 #swiper{
   width: 100%;
 }
@@ -244,22 +265,25 @@ export default {
 .article_detail dl img{
   float: left;
   margin-right:4%;
-  width: 20%;
+  width: 30%;
 }
 .article_detail dl h4{
   font-size: 0.35rem;
   font-weight: normal;
    color:rgb(114,114,114);
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
 }
 .article_detail dl p{
   color:rgb(150,150,150);
-  margin-top: 3%;
+  padding-top: 3%;
   font-size: 0.3rem;
   border-bottom: 1px solid #ccc;
-  padding-bottom: 0.5rem;
+  padding-bottom: 3%;
 }
-.article_detail:nth-child(1) dl p{
-  margin-top:8%;
+.article_detail dl p:nth-child(3){
+  margin-top: 4%;
 }
 .article_detail dl p span{
   float: right;
@@ -269,7 +293,7 @@ export default {
   background-size: 50%;
 }
 .article_detail dl p:nth-child(3){
-  font-size: 0.25rem;
+  font-size: 0.27rem;
 }
 .article_detail dl p:nth-child(3) span{
   display: none;
@@ -316,7 +340,7 @@ export default {
 /*swiper*/
 .swiper-container{
   width: 100%;
-  height: 5.62rem;
+  height: 5.2rem;
   background:white;
 }
 .swiper-container img{

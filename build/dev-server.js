@@ -30,6 +30,11 @@ var appData4 = require('../data/game1.json')
 var appData5 = require('../data/game2.json')
 var appData6 = require('../data/article1.json')
 var appData7 = require('../data/article2.json')
+var appData8 = require('../data/search1.json')
+var appData9 = require('../data/animate1.json')
+var appData10 = require('../data/animate2.json')
+var appData11 = require('../data/music1.json')
+var appData12 = require('../data/music2.json')
 var homeData = appData.data
 var playData1 = appData2.data
 var playData2 = appData3.data
@@ -37,6 +42,11 @@ var gameData1 = appData4.data
 var gameData2 = appData5.data
 var articleData1 = appData6.data
 var articleData2 = appData7.data
+var searchData1 = appData8.data
+var animateData1 = appData9.data
+var animateData2 = appData10.data
+var musicData1 = appData11.data
+var musicData2 = appData12.data
 var apiRoutes = express.Router()
 apiRoutes.get('/homeData',function (req, res) {
   res.json({
@@ -80,7 +90,36 @@ apiRoutes.get('/articleData2',function (req, res) {
     articleData2: articleData2
   })
 })
-
+apiRoutes.get('/searchData1',function (req, res) {
+  res.json({
+    errno: 0,
+    searchData1: searchData1
+  })
+})
+apiRoutes.get('/animateData1',function (req, res) {
+  res.json({
+    errno: 0,
+    animateData1: animateData1
+  })
+})
+apiRoutes.get('/animateData2',function (req, res) {
+  res.json({
+    errno: 0,
+    animateData2: animateData2
+  })
+})
+apiRoutes.get('/musicData1',function (req, res) {
+  res.json({
+    errno: 0,
+    musicData1: musicData1
+  })
+})
+apiRoutes.get('/musicData2',function (req, res) {
+  res.json({
+    errno: 0,
+    musicData2: musicData2
+  })
+})
 app.use('/api',apiRoutes)
 var compiler = webpack(webpackConfig)
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
