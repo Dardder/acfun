@@ -1,7 +1,6 @@
 <template>
   <div class="test">
-    <h1>{{ msg }}</h1>
-    <h2>123123123123123</h2>
+    <a href="https://itunes.apple.com/cn/app/id477927812" id="openApp" v-on:click='app'>贴吧客户端</a>
   </div>
 </template>
 
@@ -12,6 +11,17 @@ export default {
     return {
       msg: 'test'
     }
+  },
+  methods:function() {
+      app:function() {
+        var ifr = document.createElement('iframe');
+          ifr.src = 'com.baidu.tieba://';
+          ifr.style.display = 'none';
+          document.body.appendChild(ifr);
+          window.setTimeout(function(){
+              document.body.removeChild(ifr);
+          },3000)
+      }
   }
 }
 </script>

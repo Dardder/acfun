@@ -1,5 +1,5 @@
 <template>
-  <div class="search">
+  <div class="search" ref='search'>
     <div class='searchBar'>
       <div class='search-logo'><img src="../assets/searchLogo.png"></div>
       <div class='search-input'>
@@ -9,7 +9,7 @@
           <div class='searchLogoDiv'><img src='../assets/cancel2.png' v-on:click='cl3()'></div>
         </div>  
       </div>
-      <p>取消</p>
+      <p v-on:click='close'>取消</p>
     </div>
     <div class='searchContent'>
       <h4>热门搜索</h4>
@@ -37,6 +37,9 @@ export default {
     })
   },
   methods: {
+    close: function() {
+      this.$refs.search.style.display = 'none'
+    }
   }
 }
 </script>
@@ -75,6 +78,8 @@ export default {
             width: 0.7971rem;
             text-align: center;
             img {
+              margin-top: -15%;
+              margin-left:20%;
               height: 0.434rem;
             }
           }

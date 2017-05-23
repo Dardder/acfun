@@ -9,5 +9,24 @@
   <body>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script type="text/javascript">
+      (function (doc, win) {
+          //页面如果单独设置fontSzie=0;则不使用
+          try{fontSzie}catch(err){fontSzie = 1;}
+          if(fontSzie){
+              var docEl = doc.documentElement,
+                  resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                  recalc = function () {
+                      var clientWidth = docEl.clientWidth;
+                      if (!clientWidth) return;
+                      docEl.style.fontSize = 100 * (clientWidth / 1080) + 'px';
+                  };
+
+              if (!doc.addEventListener) return;
+              win.addEventListener(resizeEvt, recalc, false);
+              doc.addEventListener('DOMContentLoaded', recalc, false);
+          }
+      })(document, window);
+    </script>
   </body>
 </html>

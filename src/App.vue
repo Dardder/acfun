@@ -2,6 +2,7 @@
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
     <!-- 点击后出现的搜索页面组件 -->
+    <bank></bank>
     <search v-show='search_flag'></search>
     <div class='nav'>
       <ul>
@@ -32,6 +33,7 @@
     <!-- <a href="#/123">连接到123</a> -->
     <router-view></router-view>
     <footer>
+      <a href="https://itunes.apple.com/cn/app/id477927812" id="openApp" v-on:click='app'>贴吧客户端</a>
       <button>还有啥？戳我去客户端看看(´・ω・)ﾉ</button>
       <ul>
         <li>关于</li>
@@ -76,10 +78,22 @@ export default {
     },
     cl2: function () {
       document.querySelector('.search').style.display = 'block'
+    },
+    app: function () {
+        var ifr = document.createElement('iframe')
+          ifr.src = 'com.baidu.tieba://'
+          ifr.style.display = 'none'
+          document.body.appendChild(ifr)
+          window.setTimeout(function () {
+              document.body.removeChild(ifr)
+          }, 3000)
     }
   },
   components: {
     search
+  },
+  created () {
+    console.log(this.$store)
   }
 }
 </script>
